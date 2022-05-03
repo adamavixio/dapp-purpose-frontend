@@ -1,20 +1,19 @@
 import { writable } from "svelte/store";
+import type { Mission } from "../grpc/build/purpose_pb";
 
 const createMissions = () => {
-	const { subscribe, set, update } = writable([])
+	const { subscribe, set, update } = writable([] as Mission[])
 
-	const init = (missions) => {
-		console.log("init", missions)
+	const init = (missions: Mission[]) => {
 		set(missions)
 	}
 
-	const add = (missions) => {
-		console.log("add", missions)
+	const add = (missions: Mission[]) => {
 		update(state => ([...state, ...missions]))
 	}
 
-	const remove = (missions) => {
-		update(state => state.filter(mission => missions.some(removed => mission === removed)))
+	const remove = (missions: Mission[]) => {
+		update(state => state.filter(mission => missions.some(removed => mission.getTitle() !== removed.getTitle())))
 	}
 
 	return {

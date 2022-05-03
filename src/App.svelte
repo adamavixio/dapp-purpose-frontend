@@ -43,7 +43,7 @@
 <div>
 	<h1>Missions</h1>
 	{#each $missionsState as mission}
-		<h3>{mission}</h3>
+		<h3>{mission.getTitle()}</h3>
 	{/each}
 </div>
 
